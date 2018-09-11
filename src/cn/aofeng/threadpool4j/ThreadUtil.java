@@ -20,7 +20,7 @@ public class ThreadUtil {
         while (null != threadGroup.getParent()) {
             threadGroup = threadGroup.getParent();
         }
-        
+
         return threadGroup;
     }
 
@@ -29,18 +29,18 @@ public class ThreadUtil {
         int groupCapacity = root.activeGroupCount() * 2;
         ThreadGroup[] groupList = new ThreadGroup[groupCapacity];
         int groupNum = root.enumerate(groupList, true);
-        
+
         Map<String, ThreadStateInfo> stateInfoList = new HashMap<String, ThreadStateInfo>();
         stateInfoList.put(root.getName(), statSingleGroupThreadState(root));
-        for (int i = 0; i <groupNum; i++) {
+        for (int i = 0; i < groupNum; i++) {
             ThreadGroup threadGroup = groupList[i];
             ThreadStateInfo stateInfo = statSingleGroupThreadState(threadGroup);
             stateInfoList.put(threadGroup.getName(), stateInfo);
         }
-        
+
         return stateInfoList;
     }
-    
+
     /**
      * 收集指定线程组{@link ThreadGroup}中所有线程的状态信息。
      * 
@@ -51,11 +51,11 @@ public class ThreadUtil {
         if (null == threadGroup) {
             throw new IllegalArgumentException("threadGroup is null");
         }
-        
+
         int threadCapacity = threadGroup.activeCount() * 2;
         Thread[] threadList = new Thread[threadCapacity];
         int threadNum = threadGroup.enumerate(threadList);
-        
+
         ThreadStateInfo stateInfo = new ThreadStateInfo();
         for (int j = 0; j < threadNum; j++) {
             Thread thread = threadList[j];
@@ -63,19 +63,19 @@ public class ThreadUtil {
                 case NEW:
                     stateInfo.newCount += 1;
                     break;
-                case RUNNABLE:   
+                case RUNNABLE:
                     stateInfo.runnableCount += 1;
                     break;
-                case BLOCKED:   
+                case BLOCKED:
                     stateInfo.blockedCount += 1;
                     break;
-                case WAITING:   
+                case WAITING:
                     stateInfo.waitingCount += 1;
                     break;
-                case TIMED_WAITING:   
+                case TIMED_WAITING:
                     stateInfo.timedWaitingCount += 1;
                     break;
-                case TERMINATED:   
+                case TERMINATED:
                     stateInfo.terminatedCount += 1;
                     break;
                 default:
@@ -83,7 +83,7 @@ public class ThreadUtil {
                     break;
             }
         }
-        
+
         return stateInfo;
     }
 

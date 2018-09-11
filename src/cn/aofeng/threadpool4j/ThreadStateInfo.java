@@ -95,7 +95,7 @@ public class ThreadStateInfo implements Serializable {
         if (!(obj instanceof ThreadStateInfo)) {
             return false;
         }
-        ThreadStateInfo other = (ThreadStateInfo) obj;
+        ThreadStateInfo other = (ThreadStateInfo)obj;
         if (blockedCount != other.blockedCount) {
             return false;
         }

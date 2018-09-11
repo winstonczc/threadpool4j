@@ -12,8 +12,8 @@ import cn.aofeng.threadpool4j.FailHandler;
  */
 public class LogErrorFailHandler<T> implements FailHandler<T> {
 
-    private static Logger _logger = LoggerFactory.getLogger(LogErrorFailHandler.class);  
-    
+    private static Logger _logger = LoggerFactory.getLogger(LogErrorFailHandler.class);
+
     /**
      * 处理无法提交线程池执行的异步任务。
      * 

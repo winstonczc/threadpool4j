@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <threadpool4j>
 	<!-- 至少要有一个线程池default -->
-	<pool name="default">
+	<pool name="default" isForkJoin="false">
 		<corePoolSize>10</corePoolSize>
 		<maxPoolSize>100</maxPoolSize>
 		<!-- 线程空闲存话的时间。单位：秒 -->

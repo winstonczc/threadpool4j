@@ -13,18 +13,21 @@ public class ThreadPoolInfo implements Serializable, Cloneable {
 
     // 线程池名称
     private String name;
-    
+
     // 核心线程数
     private int coreSize = 5;
-    
+
     // 最大线程数
     private int maxSize = 30;
-    
+
     // 线程空闲的生存时间。单位：秒
     private long threadKeepAliveTime = 5;
-    
+
     // 线程池队列的容量
     private int queueSize = 10000;
+
+    // 是否forkJoin
+    private boolean isForkJoin = false;
 
     public String getName() {
         return name;
@@ -66,6 +69,14 @@ public class ThreadPoolInfo implements Serializable, Cloneable {
         this.queueSize = queueSize;
     }
 
+    public boolean isForkJoin() {
+        return isForkJoin;
+    }
+
+    public void setForkJoin(boolean isForkJoin) {
+        this.isForkJoin = isForkJoin;
+    }
+
     public ThreadPoolInfo clone() {
         ThreadPoolInfo obj = new ThreadPoolInfo();
         obj.name = this.name;
@@ -73,7 +84,8 @@ public class ThreadPoolInfo implements Serializable, Cloneable {
         obj.maxSize = this.maxSize;
         obj.threadKeepAliveTime = this.threadKeepAliveTime;
         obj.queueSize = this.queueSize;
-        
+        obj.isForkJoin = this.isForkJoin;
+
         return obj;
     }
 
@@ -96,7 +108,7 @@ public class ThreadPoolInfo implements Serializable, Cloneable {
         if (!(obj instanceof ThreadPoolInfo)) {
             return false;
         }
-        ThreadPoolInfo other = (ThreadPoolInfo) obj;
+        ThreadPoolInfo other = (ThreadPoolInfo)obj;
         if (name == null) {
             if (other.name != null) {
                 return false;
@@ -114,10 +126,10 @@ public class ThreadPoolInfo implements Serializable, Cloneable {
             .append(", coreSize=").append(coreSize)
             .append(", maxSize=").append(maxSize)
             .append(", threadKeepAliveTime=").append(threadKeepAliveTime)
-            .append(", queueSize=").append(queueSize).append("]");
-        
+            .append(", queueSize=").append(queueSize)
+            .append(", isForkJoin=").append(isForkJoin).append("]");
+
         return buffer.toString();
     }
 
-    
 }

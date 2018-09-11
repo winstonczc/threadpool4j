@@ -16,15 +16,15 @@ import cn.aofeng.common4j.lang.SystemUtil;
 public class ThreadStackJob extends AbstractJob {
 
     private static Logger _logger = LoggerFactory.getLogger(ThreadStackJob.class);
-    
+
     private String _lineSeparator = SystemUtil.getEndLine();
     /** 线程堆栈缓冲区初始大小 */
     private final static int BUFFER_SIZE = 4096;
-    
+
     public ThreadStackJob(int interval) {
         super._interval = interval;
     }
-    
+
     @Override
     protected void execute() {
         Map<Thread, StackTraceElement[]> stackMap = Thread.getAllStackTraces();
@@ -37,17 +37,17 @@ public class ThreadStackJob extends AbstractJob {
                 .append(", status:").append(thread.getState().toString())
                 .append(", priority:").append(thread.getPriority())
                 .append(_lineSeparator);
-            
+
             // 线程堆栈
             StackTraceElement[] stackList = entry.getValue();
             for (StackTraceElement ste : stackList) {
                 buffer.append(ste.toString())
                     .append(_lineSeparator);
             }
-            
+
             _logger.info(buffer.toString());
         }
-        
+
         super.sleep();
     }
 
